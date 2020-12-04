@@ -23,7 +23,6 @@ const SignIn = () => {
     } catch {
       setError("Failed to login")
     }
-    setLoading(false)
   }
   
     return (

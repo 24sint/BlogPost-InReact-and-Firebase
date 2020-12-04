@@ -13,10 +13,9 @@ export default function Signup() {
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
-function handleSubmit(e) {
-      
+function handleSubmit(e) {    
     e.preventDefault()
-
+    
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
@@ -30,11 +29,9 @@ function handleSubmit(e) {
     } catch {
       setError("Failed to create an account")
     }
-
     setLoading(false)
   }
-    return (
-      
+    return (  
         <Fragment>
         <div className="container">
             <Card className="auth mt-4" style={{maxWidth: "400px"}}>

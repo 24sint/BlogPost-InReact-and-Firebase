@@ -9,9 +9,7 @@ const BlogForm = (
           values, 
           setValues, 
           initialFiledValues, 
-          setBlogObject,
           currentPostKey, 
-          setCurrentPostKey
         }) => {
 
 const handleInputChange = e => {
@@ -24,16 +22,11 @@ const handleInputChange = e => {
 }
 
 const addBlog = obj => {
- 
   postsDb.ref().child('posts').push(obj)
-   setBlogObject({...obj})
-
 }
+
 const updateBlog =  (obj) => {
-
  postsDb.ref('posts').child(currentPostKey).update({...obj})
- setBlogObject({...obj})
-
 }
 
 const handleFormSubmit = e => {
