@@ -3,7 +3,7 @@ import BlogForm from "./BlogForm";
 import { Card, Button } from "react-bootstrap";
 import { postsDb } from '../firebase';
 import {useAuth} from '../contexts/AuthContext';
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
 
 const BlogPage = () => {
   const {currentUser} = useAuth();
@@ -13,7 +13,7 @@ const BlogPage = () => {
     author: '',
     date: '',
     url: '',
-    uid: currentUser ? currentUser.uid : ''
+    uid: currentUser.uid
 }
 const [ values, setValues ] = useState({...initialFiledValues})
 const [currentPostKey, setCurrentPostKey] = useState('')
@@ -27,7 +27,7 @@ const deleteBlog =  (mypostkey) => {
   }
 
   useEffect(() =>  {
-      postsDb.ref('posts').on("value", snapshot => {
+    postsDb.ref('posts').on("value", snapshot => {
          let postlist = [];
          snapshot.forEach(snap => {
              if(snap.val().uid && snap.val().uid === currentUser.uid){
@@ -40,7 +40,7 @@ const deleteBlog =  (mypostkey) => {
              setMyPosts(postlist)
          })   
      })
- }, [currentUser])
+ }, [currentUser.uid])
 
   return (
       <>
@@ -86,7 +86,7 @@ const deleteBlog =  (mypostkey) => {
         </div>       
       </>   
   )
-} 
+ } 
 
 const NewBlogPage = () =>{ 
   const {currentUser} = useAuth();

@@ -24,7 +24,6 @@ function handleSubmit(e) {
       setError("")
       setLoading(true)
       signup(emailRef.current.value, passwordRef.current.value)
-    
        history.push("/createBlog")
     } catch {
       setError("Failed to create an account")

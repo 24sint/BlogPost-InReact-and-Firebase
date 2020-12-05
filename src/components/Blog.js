@@ -1,36 +1,28 @@
-import React, {Component, Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import { Card, CardImg } from "react-bootstrap";
 import '../App.css';
 import { postsDb } from '../firebase';
 
-class BlogPage extends Component {
+const BlogPage = () => {
 
-        state = {
-            postsList: []
-        }
-
-    componentDidMount(){
-       postsDb.ref('posts').on("value", snapshot => {
-            let postlist = [];
-            snapshot.forEach(snap => {
-                postlist.push(snap.val());
-               
-            })
-            this.setState({postsList: postlist})
-        })
-    }
-    componentWillUnmount(){
-        postsDb.ref('posts').off()
-    }
-
-render(){
+    const [postList, setPostList] = useState([])
+    
+    useEffect(() =>  {
+        postsDb.ref('posts').on("value", snapshot => {
+             let postlist = [];
+             snapshot.forEach(snap => {
+                 postlist.push(snap.val())
+             }) 
+             setPostList(postlist)  
+         })
+     }, [postList])
    
     return(
     <Fragment>
         <div className="container blog">
             <h1 className="text-center">My Blogs</h1>
             <div className="d-flex flex-wrap">
-            {this.state.postsList.map((post, index )=> (
+            {postList.map((post, index )=> (
                 <Card className="article-card" key={index}>  
                     <CardImg className="card-image-top" 
                         width="100%"
@@ -58,6 +50,5 @@ render(){
      </Fragment>
 ) 
   }
-}
                 
 export default BlogPage;

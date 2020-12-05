@@ -60,10 +60,8 @@ const handleFileChange = async (e) => {
 
    setValues({
      ...values,
-     url: fileUrl
-     
+     url: fileUrl  
    })
-
 }
 
   return (
